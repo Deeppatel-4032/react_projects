@@ -1,4 +1,4 @@
-import { useState, setConvertAmount} from "react";
+import { useState } from "react";
 import InputBox from "./components/InputBox";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
@@ -6,17 +6,13 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
-  const [convertedAmount, setConvertedAmount] = useState(0)
-  console.log("convertAmount", convertedAmount);
-  
-  
+  const [convertedAmount, setConvertedAmount] = useState(0);
+  // console.log("convertAmount", convertedAmount);
 
   const CurrencyInfo = useCurrencyInfo(from);
-  
 
   const options = Object.keys(CurrencyInfo);
-  console.log("options", options);
-  
+  // console.log("options", options);
 
   const swap = () => {
     setFrom(to);
@@ -26,11 +22,11 @@ function App() {
   };
 
   const convert = () => {
-    setConvertedAmount(amount * useCurrencyInfo[to]);
+    setConvertedAmount(amount * CurrencyInfo[to]);
   };
 
   return (
-    <> 
+    <>
       <div
         className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
         style={{
@@ -62,7 +58,20 @@ function App() {
                   className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
                   onClick={swap}
                 >
-                  swap
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                    />
+                  </svg>
                 </button>
               </div>
               <div className="w-full mt-1 mb-4">
@@ -76,9 +85,9 @@ function App() {
                 />
               </div>
               <button
-                type="submit" 
+                type="submit"
                 className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
-              > 
+              >
                 Convert {from.toUpperCase()} to {to.toUpperCase()}
               </button>
             </form>
