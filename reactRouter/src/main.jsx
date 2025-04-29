@@ -1,11 +1,13 @@
 import { StrictMode } from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import './index.css'
 import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx";
 import Contact from "./components/Contact/Contact.jsx";
+import User from "./components/User/User.jsx";
+import GitHub, { githubInfoLoder } from "./components/Github/Github.jsx";
 
 //1st methode
 // const router = createBrowserRouter([
@@ -38,6 +40,11 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/user/:userId" element={<User />} />
+      <Route 
+      loader={githubInfoLoder}
+      path="/github" 
+      element={<GitHub />} />
     </Route>
   )
 )
